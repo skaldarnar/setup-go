@@ -185,8 +185,8 @@ export async function findMatch(
   stable: boolean
 ): Promise<IGoVersion | undefined> {
   let archFilter = sys.getArch();
-  if (archFilter === "x64") {
-    archFilter = "amd64"
+  if (archFilter === 'x64') {
+    archFilter = 'amd64';
   }
   let platFilter = sys.getPlatform();
 
@@ -213,20 +213,18 @@ export async function findMatch(
       version = version + '.0';
     }
 
-    core.debug(`check ${version} satisfies ${versionSpec}`);
+    core.info(`check ${version} satisfies ${versionSpec}`);
     if (
       semver.satisfies(version, versionSpec) &&
       (!stable || candidate.stable === stable)
     ) {
       goFile = candidate.files.find(file => {
-        core.debug(
-          `${file.arch}===${archFilter} && ${file.os}===${platFilter}`
-        );
+        core.info(`${file.arch}===${archFilter} && ${file.os}===${platFilter}`);
         return file.arch === archFilter && file.os === platFilter;
       });
 
       if (goFile) {
-        core.debug(`matched ${candidate.version}`);
+        core.info(`matched ${candidate.version}`);
         match = candidate;
         break;
       }

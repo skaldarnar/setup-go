@@ -5132,8 +5132,8 @@ function getInfoFromDist(versionSpec, stable) {
 function findMatch(versionSpec, stable) {
     return __awaiter(this, void 0, void 0, function* () {
         let archFilter = sys.getArch();
-        if (archFilter === "x64") {
-            archFilter = "amd64";
+        if (archFilter === 'x64') {
+            archFilter = 'amd64';
         }
         let platFilter = sys.getPlatform();
         let result;
@@ -5153,15 +5153,15 @@ function findMatch(versionSpec, stable) {
             if (parts.length == 2) {
                 version = version + '.0';
             }
-            core.debug(`check ${version} satisfies ${versionSpec}`);
+            core.info(`check ${version} satisfies ${versionSpec}`);
             if (semver.satisfies(version, versionSpec) &&
                 (!stable || candidate.stable === stable)) {
                 goFile = candidate.files.find(file => {
-                    core.debug(`${file.arch}===${archFilter} && ${file.os}===${platFilter}`);
+                    core.info(`${file.arch}===${archFilter} && ${file.os}===${platFilter}`);
                     return file.arch === archFilter && file.os === platFilter;
                 });
                 if (goFile) {
-                    core.debug(`matched ${candidate.version}`);
+                    core.info(`matched ${candidate.version}`);
                     match = candidate;
                     break;
                 }
