@@ -5132,6 +5132,9 @@ function getInfoFromDist(versionSpec, stable) {
 function findMatch(versionSpec, stable) {
     return __awaiter(this, void 0, void 0, function* () {
         let archFilter = sys.getArch();
+        if (archFilter === "x64") {
+            archFilter = "amd64";
+        }
         let platFilter = sys.getPlatform();
         let result;
         let match;

@@ -185,6 +185,9 @@ export async function findMatch(
   stable: boolean
 ): Promise<IGoVersion | undefined> {
   let archFilter = sys.getArch();
+  if (archFilter === "x64") {
+    archFilter = "amd64"
+  }
   let platFilter = sys.getPlatform();
 
   let result: IGoVersion | undefined;
